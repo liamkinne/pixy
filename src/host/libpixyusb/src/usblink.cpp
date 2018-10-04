@@ -52,8 +52,29 @@ int USBLink::open()
     throw std::runtime_error("Error during libusb_init");
   }
 
-  m_handle = libusb_open_device_with_vid_pid(m_context, PIXY_VID, PIXY_PID);
-  log("pixydebug:  libusb_open_device_with_vid_pid() = %d\n", m_handle);
+  ssize_t device_count = libusb_get_device_list(m_context, &m_devices);
+
+  if (device_count < 0) {
+    throw std::runtime_error("Get device error");
+  }
+
+  log("pixydebug:  found %d devices\n", return_value);
+
+  libusb_device_descriptor descriptor;
+  libusb_device *device;
+  for (ssize_t i = 0; i < device_count; i++) {
+    return_value = libusb_get_device_descriptor(m_devices[i], &descriptor);
+    if (return_value < 0) {
+      throw std::runtime_error("failed to get device descriptor");
+    }
+    if (descriptor.idVendor == PIXY_VID and descriptor.idProduct == PIXY_PID) {
+      device = m_devices[i];
+      break;
+    }
+  }
+
+  return_value = libusb_open(device, &m_handle);
+  log("pixydebug:  libusb_open() = %d\n", return_value);
 
   if (m_handle == NULL) {
     throw std::runtime_error("Error usb device not found");

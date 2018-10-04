@@ -35,6 +35,7 @@ public:
 
 private:
     libusb_context *m_context;
+    libusb_device **m_devices;
     libusb_device_handle *m_handle;
 
     util::timer timer_;
