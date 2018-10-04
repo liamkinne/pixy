@@ -2,8 +2,6 @@
 #include "pixy.h"
 #include "pixyinterpreter.hpp"
 
-PixyInterpreter interpreter;
-
 /** 
 
   \mainpage libpixyusb-0.4 API Reference
@@ -63,6 +61,8 @@ PixyInterpreter interpreter;
 
 */
 
+PixyInterpreter interpreter;
+
 static struct
 {
   int           error;
@@ -81,7 +81,7 @@ static struct
 static int pixy_initialized = false;
 
 Pixy::Pixy() {
-  
+
 }
 
 int Pixy::init()
