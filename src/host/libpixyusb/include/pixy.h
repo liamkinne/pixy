@@ -73,7 +73,11 @@ public:
     int16_t  angle;
   };
 
+  /**
+    @brief Constructor to create an instance of Pixy
+  */
   Pixy();
+
   /**
     @brief Creates a connection with Pixy and listens for Pixy messages.
     @return  0                         Success
