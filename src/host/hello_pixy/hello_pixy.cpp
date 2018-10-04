@@ -27,7 +27,7 @@ Pixy pixy;
 // Pixy Block buffer // 
 struct Pixy::Block blocks[BLOCK_BUFFER_SIZE];
 
-static bool run_flag = false;
+static bool run_flag = true;
 
 void handle_SIGINT(int unused)
 {
