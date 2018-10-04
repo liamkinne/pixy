@@ -19,6 +19,7 @@
 #include "link.h"
 #include "utils/timer.hpp"
 #include "libusb.h"
+#include <stdexcept>
 
 class USBLink : public Link
 {

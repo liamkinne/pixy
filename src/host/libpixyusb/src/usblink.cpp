@@ -48,17 +48,15 @@ int USBLink::open()
   return_value = libusb_init(&m_context);
   log("pixydebug:  libusb_init() = %d\n", return_value);
 
-  if (return_value) {
-    goto usblink_open__exit;
+  if (return_value < 0) {
+    throw std::runtime_error("Error during libusb_init");
   }
 
   m_handle = libusb_open_device_with_vid_pid(m_context, PIXY_VID, PIXY_PID);
   log("pixydebug:  libusb_open_device_with_vid_pid() = %d\n", m_handle);
 
   if (m_handle == NULL) {
-    return_value = PIXY_ERROR_USB_NOT_FOUND;
-
-    goto usblink_open__exit;
+    throw std::runtime_error("Error usb device not found");
   }
 
 #ifdef __MACOS__
@@ -71,14 +69,16 @@ int USBLink::open()
   log("pixydebug:  libusb_set_configuration() = %d\n", return_value);
 
   if (return_value < 0) {
-    goto usblink_open__close_and_exit;
+    libusb_close(m_handle);
+    throw std::runtime_error("failed to set configuration");
   }
 
   return_value = libusb_claim_interface(m_handle, 1);
   log("pixydebug:  libusb_claim_interface() = %d\n", return_value);
 
   if (return_value < 0) {
-    goto usblink_open__close_and_exit;
+    libusb_close(m_handle);
+    throw std::runtime_error("failed to claim interface");
   }
 
 #ifdef __LINUX__
