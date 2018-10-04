@@ -20,59 +20,59 @@
 #include <unistd.h>
 #include <pixydefs.h>
 
-#define PIXY_MAX_SIGNATURE          7
-
-// Pixy x-y position values
-#define PIXY_MIN_X                  0
-#define PIXY_MAX_X                  319
-#define PIXY_MIN_Y                  0
-#define PIXY_MAX_Y                  199
-
-// RC-servo values
-#define PIXY_RCS_MIN_POS            0
-#define PIXY_RCS_MAX_POS            1000
-#define PIXY_RCS_CENTER_POS         ((PIXY_RCS_MAX_POS-PIXY_RCS_MIN_POS)/2)
-
-// Block types
-#define PIXY_BLOCKTYPE_NORMAL       0
-#define PIXY_BLOCKTYPE_COLOR_CODE   1
-
-struct Block
-{
-  void print(char *buf)
-  {
-    int i, j;
-    char sig[6], d;
-    bool flag;
-    if (type==PIXY_BLOCKTYPE_COLOR_CODE)
-    {
-      // convert signature number to an octal string
-      for (i=12, j=0, flag=false; i>=0; i-=3)
-      {
-        d = (signature>>i)&0x07;
-        if (d>0 && !flag)
-          flag = true;
-        if (flag)
-          sig[j++] = d + '0';
-      }
-      sig[j] = '\0';	
-      sprintf(buf, "CC block! sig: %s (%d decimal) x: %d y: %d width: %d height: %d angle %d", sig, signature, x, y, width, height, angle);
-    }
-    else // regular block.  Note, angle is always zero, so no need to print
-      sprintf(buf, "sig: %d x: %d y: %d width: %d height: %d", signature, x, y, width, height);		
-  }
-
-  uint16_t type;
-  uint16_t signature;
-  uint16_t x;
-  uint16_t y;
-  uint16_t width;
-  uint16_t height;
-  int16_t  angle;
-};
-
 class Pixy {
 public:
+  static const uint8_t MAX_SIGNATURE = 7;
+
+  // Pixy x-y position values
+  static const uint16_t MIN_X = 0;
+  static const uint16_t MAX_X = 319;
+  static const uint16_t MIN_Y = 0;
+  static const uint16_t MAX_Y = 199;
+
+  // RC-servo values
+  static const uint16_t RCS_MIN_POS = 0;
+  static const uint16_t RCS_MAX_POS = 1000;
+  static const uint16_t RCS_CENTER_POS = ((RCS_MAX_POS-RCS_MIN_POS)/2);
+
+  // Block types
+  static const uint8_t BLOCKTYPE_NORMAL = 0;
+  static const uint8_t BLOCKTYPE_COLOR_CODE = 1;
+
+  struct Block
+  {
+    void print(char *buf)
+    {
+      int i, j;
+      char sig[6], d;
+      bool flag;
+      if (type==BLOCKTYPE_COLOR_CODE)
+      {
+        // convert signature number to an octal string
+        for (i=12, j=0, flag=false; i>=0; i-=3)
+        {
+          d = (signature>>i)&0x07;
+          if (d>0 && !flag)
+            flag = true;
+          if (flag)
+            sig[j++] = d + '0';
+        }
+        sig[j] = '\0';  
+        sprintf(buf, "CC block! sig: %s (%d decimal) x: %d y: %d width: %d height: %d angle %d", sig, signature, x, y, width, height, angle);
+      }
+      else // regular block.  Note, angle is always zero, so no need to print
+        sprintf(buf, "sig: %d x: %d y: %d width: %d height: %d", signature, x, y, width, height);   
+    }
+
+    uint16_t type;
+    uint16_t signature;
+    uint16_t x;
+    uint16_t y;
+    uint16_t width;
+    uint16_t height;
+    int16_t  angle;
+  };
+
   Pixy();
   /**
     @brief Creates a connection with Pixy and listens for Pixy messages.

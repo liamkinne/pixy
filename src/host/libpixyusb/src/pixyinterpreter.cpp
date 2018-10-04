@@ -72,7 +72,7 @@ void PixyInterpreter::close()
   }
 }
 
-int PixyInterpreter::get_blocks(int max_blocks, Block * blocks)
+int PixyInterpreter::get_blocks(int max_blocks, Pixy::Block * blocks)
 {
   uint16_t number_of_blocks_to_copy;
   uint16_t index;
@@ -92,7 +92,7 @@ int PixyInterpreter::get_blocks(int max_blocks, Block * blocks)
   // Copy blocks //
   
   for (index = 0; index != number_of_blocks_to_copy; ++index) {
-    memcpy(&blocks[index], &blocks_[index], sizeof(Block));
+    memcpy(&blocks[index], &blocks_[index], sizeof(Pixy::Block));
   }
 
   blocks_are_new_ = false;
@@ -274,13 +274,13 @@ void PixyInterpreter::interpret_CCB2(const void * CCB2_data[])
 void PixyInterpreter::add_normal_blocks(const BlobA * blocks, uint32_t count)
 {
   uint32_t index;
-  Block    block;
+  Pixy::Block    block;
 
   for (index = 0; index != count; ++index) {
 
     // Decode CCB1 'Normal' Signature Type //
 
-    block.type      = PIXY_BLOCKTYPE_NORMAL;
+    block.type      = Pixy::BLOCKTYPE_NORMAL;
     block.signature = blocks[index].m_model;
     block.width     = blocks[index].m_right - blocks[index].m_left;
     block.height    = blocks[index].m_bottom - blocks[index].m_top;
@@ -307,13 +307,13 @@ void PixyInterpreter::add_normal_blocks(const BlobA * blocks, uint32_t count)
 void PixyInterpreter::add_color_code_blocks(const BlobB * blocks, uint32_t count)
 {
   uint32_t index;
-  Block    block;
+  Pixy::Block    block;
     
   for (index = 0; index != count; ++index) {
 
     // Decode 'Color Code' Signature Type //
 
-    block.type      = PIXY_BLOCKTYPE_COLOR_CODE;
+    block.type      = Pixy::BLOCKTYPE_COLOR_CODE;
     block.signature = blocks[index].m_model;
     block.width     = blocks[index].m_right - blocks[index].m_left;
     block.height    = blocks[index].m_bottom - blocks[index].m_top;
