@@ -36,8 +36,10 @@ public:
   static const uint16_t RCS_CENTER_POS = ((RCS_MAX_POS-RCS_MIN_POS)/2);
 
   // Block types
-  static const uint8_t BLOCKTYPE_NORMAL = 0;
-  static const uint8_t BLOCKTYPE_COLOR_CODE = 1;
+  enum BLOCKTYPE {
+    NORMAL = 0,
+    COLOR_CODE = 1
+  };
 
   struct Block
   {
@@ -46,7 +48,7 @@ public:
       int i, j;
       char sig[6], d;
       bool flag;
-      if (type==BLOCKTYPE_COLOR_CODE)
+      if (type==COLOR_CODE)
       {
         // convert signature number to an octal string
         for (i=12, j=0, flag=false; i>=0; i-=3)
@@ -64,7 +66,7 @@ public:
         sprintf(buf, "sig: %d x: %d y: %d width: %d height: %d", signature, x, y, width, height);   
     }
 
-    uint16_t type;
+    BLOCKTYPE type;
     uint16_t signature;
     uint16_t x;
     uint16_t y;
