@@ -8,3 +8,5 @@
 *.jtag
 *.swp
 *.swo
+build/*
+src/host/libpixyusb/build/*
