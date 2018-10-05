@@ -15,7 +15,7 @@
 
 #include "timer.hpp"
 
-using namespace boost::chrono;
+using namespace std::chrono;
 
 util::timer::timer()
 {

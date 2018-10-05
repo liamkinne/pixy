@@ -18,7 +18,7 @@
 
 #include <stdint.h>
 #include <string>
-#include <boost/chrono.hpp>
+#include <chrono>
 
 namespace util
 {
@@ -33,7 +33,7 @@ namespace util
 
     private:
     
-      boost::chrono::steady_clock::time_point epoch_;
+      std::chrono::steady_clock::time_point epoch_;
   };
 }
 
