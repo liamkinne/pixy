@@ -18,6 +18,7 @@
 
 #include <stdint.h>
 #include <unistd.h>
+#include <cstring>
 #include <pixydefs.h>
 
 class Pixy {

@@ -446,7 +446,7 @@ int Pixy::get_firmware_version(uint16_t * major, uint16_t * minor, uint16_t * bu
     return return_value;
   }
 
-  memcpy((void *) version, pixy_version, 3 * sizeof(uint16_t));
+  std::memcpy((void *) version, pixy_version, 3 * sizeof(uint16_t));
 
   *major = version[0];
   *minor = version[1];

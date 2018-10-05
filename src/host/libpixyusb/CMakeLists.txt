@@ -34,7 +34,6 @@ include_directories (src
                      src/util
                      include
                      ../../common/inc
-                     ${Boost_INCLUDE_DIR}
                      ${LIBUSB_1_INCLUDE_DIRS})
 
 install (TARGETS pixyusb DESTINATION lib)

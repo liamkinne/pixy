@@ -50,7 +50,7 @@ int PixyInterpreter::init(uint index)
   // Create the interpreter thread //
 
   thread_dead_ = false;
-  thread_      = boost::thread(&PixyInterpreter::interpreter_thread, this);
+  thread_      = std::thread(&PixyInterpreter::interpreter_thread, this);
 
   return 0;
 }
