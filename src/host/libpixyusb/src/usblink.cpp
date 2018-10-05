@@ -57,6 +57,9 @@ int USBLink::open()
   if (device_count < 0) {
     throw std::runtime_error("Get device error");
   }
+  else if (device_count == 0) {
+    throw std::runtime_error("No devices found");
+  }
 
   log("pixydebug:  found %d devices\n", device_count);
 
