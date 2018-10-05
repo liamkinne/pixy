@@ -108,48 +108,52 @@ usblink_open__exit:
 
 
 
-int USBLink::send(const uint8_t *data, uint32_t len, uint16_t timeoutMs)
+int USBLink::send(const uint8_t *data, uint32_t len, uint16_t timeout_ms)
 {
-    int res, transferred;
+    int response, transferred;
     
     log("pixydebug: USBLink::send()\n");
 
-    if (timeoutMs==0) // 0 equals infinity
-        timeoutMs = 10;
+    if (timeout_ms==0) // 0 equals infinity
+        timeout_ms = 10;
 
-    if ((res=libusb_bulk_transfer(m_handle, 0x02, (unsigned char *)data, len, &transferred, timeoutMs))<0)
+    response = libusb_bulk_transfer(m_handle, 0x02, (unsigned char *)data, len, &transferred, timeout_ms);
+
+    if (response < 0)
     {
-        log("pixydebug:  libusb_bulk_transfer() = %d\n", res);
+        log("pixydebug:  libusb_bulk_transfer() = %d\n", response);
 #ifdef __MACOS__
         libusb_clear_halt(m_handle, 0x02);
 #endif
-        log("pixydebug: USBLink::send() returned %d\n", res);
-        return res;
+        log("pixydebug: USBLink::send() returned %d\n", response);
+        return response;
     }
     
     log("pixydebug: USBLink::send() returned %d\n", transferred);
     return transferred;
 }
 
-int USBLink::receive(uint8_t *data, uint32_t len, uint16_t timeoutMs)
+int USBLink::receive(uint8_t *data, uint32_t len, uint16_t timeout_ms)
 {
-    int res, transferred;
+    int response, transferred;
 
     log("pixydebug: USBLink::receive()\n");
 
-    if (timeoutMs==0) // 0 equals infinity
-        timeoutMs = 50;
+    if (timeout_ms==0) // 0 equals infinity
+        timeout_ms = 50;
 
-    if ((res=libusb_bulk_transfer(m_handle, 0x82, (unsigned char *)data, len, &transferred, timeoutMs))<0)
+    response = libusb_bulk_transfer(m_handle, 0x82, (unsigned char *)data, len, &transferred, timeout_ms);
+
+    if (response < 0)
     {
-        log("pixydebug:  libusb_bulk_transfer() = %d\n", res);
+        log("pixydebug:  libusb_bulk_transfer() = %d\n", response);
 #ifdef __MACOS__
         libusb_clear_halt(m_handle, 0x82);
 #endif
-        return res;
+        return response;
     }
     
-    log("pixydebug:  libusb_bulk_transfer(%d bytes) = %d\n", len, res);
+    log("pixydebug:  libusb_bulk_transfer(%d bytes) = %d\n", len, response);
     log("pixydebug: USBLink::receive() returned %d (bytes transferred)\n", transferred);
     return transferred;
 }
