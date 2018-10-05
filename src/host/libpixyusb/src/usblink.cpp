@@ -74,6 +74,10 @@ int USBLink::open()
       device = m_devices[i];
       break;
     }
+
+    if  (i == device_count-1) {
+      throw std::runtime_error("Can't find any Pixy devices");
+    }
   }
 
   return_value = libusb_open(device, &m_handle);
