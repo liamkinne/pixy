@@ -88,7 +88,7 @@ public:
     @return  PIXY_ERROR_USB_BUSY       USB Error: Busy
     @return  PIXY_ERROR_USB_NO_DEVICE  USB Error: No device
   */
-  int init();
+  int init(uint index);
 
   /**
     @brief      Indicates when new block data from Pixy is received.

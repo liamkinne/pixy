@@ -84,11 +84,11 @@ Pixy::Pixy() {
 
 }
 
-int Pixy::init()
+int Pixy::init(uint index)
 {
   int return_value;
 
-  return_value = interpreter.init();
+  return_value = interpreter.init(index);
 
   if(return_value == 0) 
   {

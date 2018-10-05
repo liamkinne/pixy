@@ -29,7 +29,7 @@ PixyInterpreter::~PixyInterpreter()
   close();
 }
 
-int PixyInterpreter::init()
+int PixyInterpreter::init(uint index)
 {
   int USB_return_value;
 
@@ -39,7 +39,7 @@ int PixyInterpreter::init()
     return 0;
   }
 
-  USB_return_value = link_.open();
+  USB_return_value = link_.open(index);
 
   if(USB_return_value < 0) {
     return USB_return_value;

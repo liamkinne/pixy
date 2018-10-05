@@ -46,7 +46,7 @@ class PixyInterpreter : public Interpreter
 
     */
   
-    int init();
+    int init(uint index);
     
     /**
       @brief  Terminates the USB connection to Pixy and
