@@ -39,7 +39,7 @@ private:
     libusb_device_handle *m_handle;
 
     ssize_t get_device_list(libusb_context *context, libusb_device ***list);
-    libusb_device *get_pixy_from_index(libusb_device **list, ssize_t size, uint index);
+    libusb_device *get_pixy_using_index(libusb_device **list, ssize_t size, uint index);
 
     util::timer timer_;
 };
