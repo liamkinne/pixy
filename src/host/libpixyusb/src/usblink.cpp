@@ -54,7 +54,7 @@ int USBLink::open()
 
   ssize_t device_count = get_device_list(m_context, &m_devices);
 
-  libusb_device* m_device = get_pixy_using_index(m_devices, device_count, 1);
+  libusb_device* m_device = get_pixy_using_index(m_devices, device_count, 0);
 
   return_value = libusb_open(m_device, &m_handle);
   log("pixydebug:  libusb_open() = %d\n", return_value);
