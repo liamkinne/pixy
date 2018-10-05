@@ -52,35 +52,11 @@ int USBLink::open()
     throw std::runtime_error("Error during libusb_init");
   }
 
-  ssize_t device_count = libusb_get_device_list(m_context, &m_devices);
+  ssize_t device_count = get_device_list(m_context, &m_devices);
 
-  if (device_count < 0) {
-    throw std::runtime_error("Get device error");
-  }
-  else if (device_count == 0) {
-    throw std::runtime_error("No devices found");
-  }
+  libusb_device* m_device = get_pixy_using_index(m_devices, device_count, 1);
 
-  log("pixydebug:  found %d devices\n", device_count);
-
-  libusb_device_descriptor descriptor;
-  libusb_device *device;
-  for (ssize_t i = 0; i < device_count; i++) {
-    return_value = libusb_get_device_descriptor(m_devices[i], &descriptor);
-    if (return_value < 0) {
-      throw std::runtime_error("failed to get device descriptor");
-    }
-    if (descriptor.idVendor == PIXY_VID and descriptor.idProduct == PIXY_PID) {
-      device = m_devices[i];
-      break;
-    }
-
-    if  (i == device_count-1) {
-      throw std::runtime_error("Can't find any Pixy devices");
-    }
-  }
-
-  return_value = libusb_open(device, &m_handle);
+  return_value = libusb_open(m_device, &m_handle);
   log("pixydebug:  libusb_open() = %d\n", return_value);
 
   if (m_handle == NULL) {
@@ -188,3 +164,43 @@ uint32_t USBLink::getTimer()
   return timer_.elapsed();
 }
 
+ssize_t USBLink::get_device_list(libusb_context *context, libusb_device ***list) {
+  ssize_t device_count = libusb_get_device_list(context, list);
+
+  if (device_count < 0) {
+    throw std::runtime_error("Get device error");
+  }
+  else if (device_count == 0) {
+    throw std::runtime_error("No devices found");
+  }
+
+  log("pixydebug:  found %d devices\n", device_count);
+
+  return device_count;
+}
+
+libusb_device* USBLink::get_pixy_using_index(libusb_device **list, ssize_t size, uint index) {
+  int error_code;
+
+  for (ssize_t i = 0; i < size; i++) {
+    libusb_device_descriptor descriptor;
+    error_code = libusb_get_device_descriptor(list[i], &descriptor);
+
+    if (error_code < 0) {
+      throw std::runtime_error("failed to get device descriptor");
+    }
+
+    if (descriptor.idVendor == PIXY_VID and descriptor.idProduct == PIXY_PID) {
+      if (index == 0) {
+        return list[i];
+      }
+      else {
+        index--;
+      }
+    }
+
+    if (i == size-1) {
+      throw std::runtime_error("failed to find a Pixy device with the given index");
+    }
+  }
+}
