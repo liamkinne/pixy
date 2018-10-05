@@ -58,7 +58,7 @@ int USBLink::open()
     throw std::runtime_error("Get device error");
   }
 
-  log("pixydebug:  found %d devices\n", return_value);
+  log("pixydebug:  found %d devices\n", device_count);
 
   libusb_device_descriptor descriptor;
   libusb_device *device;
