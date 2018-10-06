@@ -77,7 +77,7 @@ class PixyInterpreter : public Interpreter
       @return  PIXY_ERROR_USB_NO_DEVICE      USB Error: No device
       @return  PIXY_ERROR_INVALID_PARAMETER  Invalid pararmeter specified
     */
-    int get_blocks(int max_blocks, Pixy::Block * blocks);
+    int get_blocks(uint max_blocks, Pixy::Block * blocks);
 
     /**
       @brief         Sends a command to Pixy.

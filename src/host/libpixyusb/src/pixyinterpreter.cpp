@@ -72,7 +72,7 @@ void PixyInterpreter::close()
   }
 }
 
-int PixyInterpreter::get_blocks(int max_blocks, Pixy::Block * blocks)
+int PixyInterpreter::get_blocks(uint max_blocks, Pixy::Block * blocks)
 {
   uint16_t number_of_blocks_to_copy;
   uint16_t index;
