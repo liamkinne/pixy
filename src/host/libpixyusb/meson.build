@@ -32,5 +32,15 @@ shared_library('pixyusb',
 	],
 	link_args: [
 		'-pthread'
-	]
+	],
+	install: true,
+	install_dir: 'lib'
 )
+
+install_headers([
+	'include/pixy.h',
+	'../../common/inc/pixydefs.h'
+	],
+	subdir: ''
+)
+
