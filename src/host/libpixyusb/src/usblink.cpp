@@ -92,15 +92,6 @@ int USBLink::open(uint index)
 
   /* Success */
   return_value = 0;
-  goto usblink_open__exit;
-
-usblink_open__close_and_exit:
-  /* Cleanup after error */
-
-  libusb_close(m_handle);
-  m_handle = 0;
-
-usblink_open__exit:
   log("pixydebug: USBLink::open() returned %d\n", return_value);
 
   return return_value;
