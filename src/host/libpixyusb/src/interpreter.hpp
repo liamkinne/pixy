@@ -19,7 +19,7 @@
 class Interpreter
 {
   public:
-
+  	virtual ~Interpreter() {};
     virtual void interpret_data(const void *data []) = 0;
 };
 

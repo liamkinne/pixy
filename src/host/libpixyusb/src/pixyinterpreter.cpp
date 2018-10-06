@@ -219,7 +219,6 @@ void PixyInterpreter::interpret_CCB1(const void * CCB1_data[])
 {
   uint32_t       number_of_blobs;
   const BlobA *  blobs;
-  uint32_t       index;
   
   // Add blocks with normal signatures //
   
@@ -242,7 +241,6 @@ void PixyInterpreter::interpret_CCB2(const void * CCB2_data[])
   uint32_t       number_of_blobs;
   const BlobA *  A_blobs;
   const BlobB *  B_blobs;
-  uint32_t       index;
 
   // Wait for permission to use blocks_ vector //
   blocks_access_mutex_.lock();
