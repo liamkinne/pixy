@@ -9,7 +9,7 @@ thread_dep = dependency('threads')
 include_dir = include_directories('include')
 common_dir = include_directories('../../common/inc/')
 
-shared_library('pixyusb',
+shared_library('libpixyusb',
 	'src/chirpreceiver.cpp',
 	'src/chirpreceiver.hpp',
 	'src/interpreter.hpp',
@@ -36,10 +36,13 @@ shared_library('pixyusb',
 	install_dir: 'lib'
 )
 
-install_headers([
-	'include/pixy.h',
-	'../../common/inc/pixydefs.h'
-	],
-	subdir: ''
+pkg = import('pkgconfig')
+libs = '-lpixyusb'     # the library/libraries users need to link against
+h = ['include'] # subdirectories of ${prefix}/${includedir} to add to header path
+pkg.generate(libraries : libs,
+	subdirs : h,
+	version : '0.4',
+	name : 'libpixyusb',
+	description : 'C++ API for interfacing with the Pixy camera'
 )
 
