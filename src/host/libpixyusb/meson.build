@@ -4,6 +4,7 @@ project('libpixyusb',
 )
 
 libusb_dep = dependency('libusb-1.0')
+thread_dep = dependency('threads')
 
 include_dir = include_directories('include')
 common_dir = include_directories('../../common/inc/')
@@ -25,13 +26,11 @@ shared_library('pixyusb',
 		common_dir
 	],
 	dependencies: [
-		libusb_dep
+		libusb_dep,
+		thread_dep
 	],
 	cpp_args: [
 		'-Wall'
-	],
-	link_args: [
-		'-pthread'
 	],
 	install: true,
 	install_dir: 'lib'
