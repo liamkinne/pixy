@@ -432,7 +432,6 @@ int Pixy::get_firmware_version(uint16_t * major, uint16_t * minor, uint16_t * bu
   uint32_t   response;
   uint16_t   version[3];
   int        return_value;
-  int        chirp_response;
 
   if(major == 0 || minor == 0 || build == 0) {
     // Error: Null pointer //
