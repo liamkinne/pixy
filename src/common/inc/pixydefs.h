@@ -16,7 +16,7 @@
 #ifndef __PIXYDEFS_H__
 #define __PIXYDEFS_H__
 
-#include "libusb.h"
+#include <libusb.h>
 
 #define PIXY_VID       0xB1AC
 #define PIXY_PID       0xF000
