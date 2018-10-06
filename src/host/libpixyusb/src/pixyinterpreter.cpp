@@ -79,7 +79,7 @@ int PixyInterpreter::get_blocks(uint max_blocks, Pixy::Block * blocks)
 
   // Check parameters //
 
-  if(max_blocks < 0 || blocks == 0) {
+  if(blocks == 0) {
     return PIXY_ERROR_INVALID_PARAMETER;
   }
     
