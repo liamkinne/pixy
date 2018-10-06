@@ -9,7 +9,7 @@ thread_dep = dependency('threads')
 include_dir = include_directories('include')
 common_dir = include_directories('../../common/inc/')
 
-shared_library('libpixyusb',
+shared_library('pixyusb',
 	'src/chirpreceiver.cpp',
 	'src/chirpreceiver.hpp',
 	'src/interpreter.hpp',
