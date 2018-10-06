@@ -27,6 +27,9 @@ shared_library('pixyusb',
 	dependencies: [
 		libusb_dep
 	],
+	cpp_args: [
+		'-Wall'
+	],
 	link_args: [
 		'-pthread'
 	]
