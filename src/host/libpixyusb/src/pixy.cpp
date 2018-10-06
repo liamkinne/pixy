@@ -78,9 +78,11 @@ static struct
   { 0,                          0 }
 };
 
-static int pixy_initialized = false;
 
-Pixy::Pixy() {
+
+Pixy::Pixy():
+  pixy_initialized(false)
+{
 
 }
 

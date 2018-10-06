@@ -278,6 +278,9 @@ public:
     @return      Negative  Error
   */
   int get_firmware_version(uint16_t * major, uint16_t * minor, uint16_t * build);
+
+private:
+  bool pixy_initialized;
 };
 
 #endif
