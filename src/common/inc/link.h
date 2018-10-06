@@ -41,7 +41,7 @@ public:
         m_flags = 0;
         m_blockSize = 0;
     }
-    ~Link()
+    virtual ~Link()
     {
     }
 
