@@ -20,6 +20,8 @@
 #include "utils/timer.hpp"
 #include "debuglog.h"
 
+#define __LINUX__
+
 USBLink::USBLink()
 {
   m_handle = 0;
