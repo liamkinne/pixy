@@ -17,6 +17,7 @@
 #define __PIXY_H__
 
 #include <stdint.h>
+#include <stdio.h>
 #include <unistd.h>
 #include <cstring>
 #include <pixydefs.h>
