@@ -28,9 +28,9 @@
 #define LINK_RESULT_ERROR_SEND_TIMEOUT                  -102
 
 // link flag index
-#define LINK_FLAG_INDEX_FLAGS                           0x00
-#define LINK_FLAG_INDEX_SHARED_MEMORY_LOCATION          0x01
-#define LINK_FLAG_INDEX_SHARED_MEMORY_SIZE              0x02
+const uint8_t LINK_FLAG_INDEX_FLAGS = 0x0;
+const uint8_t LINK_FLAG_INDEX_SHARED_MEMORY_LOCATION = 0x1;
+const uint8_t LINK_FLAG_INDEX_SHARED_MEMORY_SIZE = 0x2;
 
 
 class Link
