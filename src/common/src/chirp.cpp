@@ -1271,7 +1271,7 @@ int Chirp::recvFull(uint8_t *type, ChirpProc *proc, bool wait)
         if ((res=m_link->receive(m_buf, CRP_MAX_HEADER_LEN, wait?m_headerTimeout:0))<0)
             return res;
         // check to see if we received less data than expected
-        if (res<sizeof(uint32_t))
+        if ((uint)res<sizeof(uint32_t))
             continue;
 		recvd = res;
         startCode = *(uint32_t *)m_buf;
