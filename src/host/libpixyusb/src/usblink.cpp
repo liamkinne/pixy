@@ -193,9 +193,7 @@ libusb_device* USBLink::get_pixy_using_index(libusb_device **list, ssize_t size,
         index--;
       }
     }
-
-    if (i == size-1) {
-      throw std::runtime_error("failed to find a Pixy device with the given index");
-    }
   }
+
+  throw std::runtime_error("failed to find a Pixy device with the given index");
 }
