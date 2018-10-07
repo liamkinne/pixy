@@ -54,7 +54,7 @@ int USBLink::open(uint index)
     throw std::runtime_error("Error during libusb_init");
   }
 
-  ssize_t device_count = get_device_list(m_context, &m_devices);
+  ssize_t device_count = get_device_list(&m_devices);
 
   libusb_device* m_device = get_pixy_using_index(m_devices, device_count, index);
 
@@ -161,8 +161,8 @@ uint32_t USBLink::getTimer()
   return timer_.elapsed();
 }
 
-ssize_t USBLink::get_device_list(libusb_context *context, libusb_device ***list) {
-  ssize_t device_count = libusb_get_device_list(context, list);
+ssize_t USBLink::get_device_list(libusb_device ***list) {
+  ssize_t device_count = libusb_get_device_list(m_context, list);
 
   if (device_count < 0) {
     throw std::runtime_error("Get device error");
