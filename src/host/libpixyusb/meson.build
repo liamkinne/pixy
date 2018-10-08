@@ -7,6 +7,7 @@ libusb_dep = dependency('libusb-1.0')
 thread_dep = dependency('threads')
 
 include_dir = include_directories('include')
+source_dir = include_directories('src')
 common_dir = include_directories('../../common/inc/')
 
 shared_library('pixyusb',
@@ -23,6 +24,7 @@ shared_library('pixyusb',
 	'../../common/src/chirp.cpp',
 	include_directories: [
 		include_dir,
+		source_dir,
 		common_dir
 	],
 	dependencies: [
