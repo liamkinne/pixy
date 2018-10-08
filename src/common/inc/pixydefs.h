@@ -89,44 +89,4 @@
 #define END_OUT_ARGS END
 #define END_IN_ARGS END
 
-// Block types
-enum BLOCKTYPE {
-  NORMAL = 0,
-  COLOR_CODE = 1
-};
-
-struct Block
-{
-  void print(char *buf)
-  {
-    int i, j;
-    char sig[6], d;
-    bool flag;
-    if (type==COLOR_CODE)
-    {
-      // convert signature number to an octal string
-      for (i=12, j=0, flag=false; i>=0; i-=3)
-      {
-        d = (signature>>i)&0x07;
-        if (d>0 && !flag)
-          flag = true;
-        if (flag)
-          sig[j++] = d + '0';
-      }
-      sig[j] = '\0';  
-      sprintf(buf, "CC block! sig: %s (%d decimal) x: %d y: %d width: %d height: %d angle %d", sig, signature, x, y, width, height, angle);
-    }
-    else // regular block.  Note, angle is always zero, so no need to print
-      sprintf(buf, "sig: %d x: %d y: %d width: %d height: %d", signature, x, y, width, height);   
-  }
-
-  BLOCKTYPE type;
-  uint16_t signature;
-  uint16_t x;
-  uint16_t y;
-  uint16_t width;
-  uint16_t height;
-  int16_t  angle;
-};
-
 #endif

@@ -19,9 +19,8 @@
 #include <vector>
 #include <thread>
 #include <mutex>
-#include <unistd.h>
 #include "pixytypes.h"
-#include <pixydefs.h>
+#include "pixy.h"
 #include "usblink.h"
 #include "interpreter.hpp"
 #include "chirpreceiver.hpp"
@@ -78,7 +77,7 @@ class PixyInterpreter : public Interpreter
       @return  PIXY_ERROR_USB_NO_DEVICE      USB Error: No device
       @return  PIXY_ERROR_INVALID_PARAMETER  Invalid pararmeter specified
     */
-    int get_blocks(uint max_blocks, Block * blocks);
+    int get_blocks(uint max_blocks, Pixy::Block * blocks);
 
     /**
       @brief         Sends a command to Pixy.
@@ -102,7 +101,7 @@ class PixyInterpreter : public Interpreter
     std::thread        thread_;
     bool               thread_die_;
     bool               thread_dead_;
-    std::vector<Block> blocks_;
+    std::vector<Pixy::Block> blocks_;
     std::mutex         blocks_access_mutex_;
     std::mutex         chirp_access_mutex_;
     bool               blocks_are_new_;

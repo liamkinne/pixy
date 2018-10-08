@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "pixy.h"
+#include "pixyinterpreter.hpp"
 
 /** 
 
@@ -60,6 +61,8 @@
 
 */
 
+PixyInterpreter interpreter;
+
 static struct
 {
   int           error;
@@ -78,7 +81,6 @@ static struct
 
 
 Pixy::Pixy():
-  interpreter(),
   pixy_initialized(false)
 {
 
